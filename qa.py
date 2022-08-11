@@ -5,6 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+def get_values():
+    url = "https://z3n42.github.io"
+    resp = requests.get(url=url)
+    data = resp.json()
+    return (data.values())
+
 def scrap_title(website):
     driver = webdriver.Firefox()
     driver.get(website)
@@ -12,64 +18,50 @@ def scrap_title(website):
     driver.quit()
     print(title)
 
+def get_args():
+    parser = argparse.ArgumentParser(description='Json Explorer')
+    parser.add_argument('-n', '--name', nargs=1)
+    parser.add_argument('-t', '--type', nargs=1)
+    parser.add_argument('-l', '--language', nargs='*')
+    parser.add_argument('-o', '--owner', nargs=1)
+    parser.add_argument('-c', '--country', nargs=1)
+    parser.add_argument('-w', '--website', nargs=1)
+    return (parser.parse_args()) 
 
-parser = argparse.ArgumentParser(description='Json Explorer')
-parser.add_argument('-n', '--name', nargs=1)
-parser.add_argument('-t', '--type', nargs=1)
-parser.add_argument('-l', '--language', nargs='*')
-parser.add_argument('-o', '--owner', nargs=1)
-parser.add_argument('-c', '--country', nargs=1)
-parser.add_argument('-w', '--website', nargs=1)
-args = parser.parse_args() 
+class Parser:
+    def __init__(self, lista, args):
+        self.lista = lista
+        self.args = args
 
-url = "https://z3n42.github.io"
+    def search(self):
+            for x in self.lista:
+                if self.args.type:
+                    if x['Type'] in self.args.type:
+                        print(x['Name'])
+                if self.args.name:        
+                    if x['Name'] in self.args.name:
+                        print(x)
+                if self.args.language:
+                    for i in x['Language']:
+                        if i in self.args.language:
+                            print(x['Name'])
+                if self.args.owner:
+                    if x['Owner'] in self.args.owner:
+                        print(x['Name'])
+                if self.args.country:
+                    if x['Country'] in self.args.country:
+                        print(x['Name'])
+                if self.args.website:
+                    if x['Website'] in self.args.website:
+                        print(x['Name'])
+                        scrap_title(x['Website'])
 
-c_line = sys.argv
-
-if len(c_line) == 1:
+if len(sys.argv) == 1:
     print("input error")
     exit()
 
-resp = requests.get(url=url)
+args = get_args()
+lista = get_values()
 
-data = resp.json()
-lista = data.values()
-
-if args.type != None:
-    for x in lista:
-        if x['Type'] in args.type:
-            print(x['Name'])
-
-if args.name != None:
-    for x in lista:
-        if x['Name'] in args.name:
-            print(x)
-
-if args.language != None:
-    for x in lista:
-        for i in x['Language']:
-            if i in args.language:
-                print(x['Name'])
-
-if args.owner != None:
-    for x in lista:
-        if x['Owner'] in args.owner:
-            print(x['Name'])
-
-if args.country != None:
-    for x in lista:
-        if x['Country'] in args.country:
-            print(x['Name'])
-
-if args.website != None:
-    for x in lista:
-        if x['Website'] in args.website:
-            print(x['Name'])
-            scrap_title(x['Website'])
-
-print("\n")
-
-
-
-
-
+test = Parser(lista, args)
+test.search()

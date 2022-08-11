@@ -1,0 +1,15 @@
+1660235964240	geckodriver	INFO	Listening on 127.0.0.1:52393
+1660235964747	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "34739" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile9gSQbS"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1660235965340	Marionette	INFO	Marionette enabled
+1660235965345	Marionette	INFO	Listening on port 34409
+Read port: 34409
+WebDriver BiDi listening on ws://localhost:34739
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1660235965844	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile9gSQbS/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:34739/devtools/browser/67340142-fa1d-4dff-8a6f-9e06e25dd41c
+JavaScript warning: https://assets.adobedtm.com/0681c221600c/d0943e7fed9e/launch-90f4fb204f3b.min.js, line 7: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660235988759	Marionette	INFO	Stopped listening on port 34409
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
