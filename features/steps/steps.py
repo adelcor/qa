@@ -16,6 +16,6 @@ def step_impl(context):
 @then ('the parser return a newspaper name and a title website')
 def step_impl(context):
     test = context.parser.search()
-    assert test == "El Mundo"
+    assert test == ['El Mundo', 'El Pais', 'The Sun', 'The Daily Telegraph', 'The New York Times', 'CNN International', 'Global Times']
     
     

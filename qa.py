@@ -60,10 +60,11 @@ class Parser:
                         box.append(scrap_title(x['Website']))
             print(box)
             return(box)
-
+"""
 if len(sys.argv) == 1:
     print("input error")
     exit()
+    """
 
 args = get_args()
 lista = get_values()
