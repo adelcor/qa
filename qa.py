@@ -16,7 +16,7 @@ def scrap_title(website):
     driver.get(website)
     title = driver.title
     driver.quit()
-    print(title)
+    return title
 
 def get_args():
     parser = argparse.ArgumentParser(description='Json Explorer')
@@ -34,27 +34,32 @@ class Parser:
         self.args = args
 
     def search(self):
+            
+            box = list()
+
             for x in self.lista:
                 if self.args.type:
                     if x['Type'] in self.args.type:
-                        print(x['Name'])
+                        box.append(x['Name'])
                 if self.args.name:        
                     if x['Name'] in self.args.name:
-                        print(x)
+                        box.append(x)
                 if self.args.language:
                     for i in x['Language']:
                         if i in self.args.language:
-                            print(x['Name'])
+                            box.append(x['Name'])
                 if self.args.owner:
                     if x['Owner'] in self.args.owner:
-                        print(x['Name'])
+                        box.append(x['Name'])
                 if self.args.country:
                     if x['Country'] in self.args.country:
-                        print(x['Name'])
+                        box.append(x['Name'])
                 if self.args.website:
                     if x['Website'] in self.args.website:
-                        print(x['Name'])
-                        scrap_title(x['Website'])
+                        box.append(x['Name'])
+                        box.append(scrap_title(x['Website']))
+            print(box)
+            return(box)
 
 if len(sys.argv) == 1:
     print("input error")
