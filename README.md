@@ -1,4 +1,4 @@
 # qa
-My training for qa with Behave and Selenium
+My training for QA with Behave and Selenium
 
 constructing...
