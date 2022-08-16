@@ -69,5 +69,6 @@ if len(sys.argv) == 1:
 args = get_args()
 lista = get_values()
 
+
 test = Parser(lista, args)
 test.search()

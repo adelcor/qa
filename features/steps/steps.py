@@ -1,21 +1,45 @@
 from behave import *
 from qa import *
 
-@given ('a parser')
+@given ('User input a owner')
 def step_impl(context):
     lista = get_values()
     args = get_args()
     context.parser = Parser(lista, args)
-    context.parser.args.type = ['Daily newspaper']
 
-@when ('input -n')
-def step_impl(context):
-    assert context.parser.args.type
-    
+@when ('I put owner: {arg} in a parser and i expect a {response}')
+def step_impl(context, arg, response):
+    owner = list()
+    owner = arg.split(",")
+    context.parser.args.owner = owner
+    test = list()
+    test = response.split(",")
+    context.response = test
+    assert context.parser.args.owner
 
-@then ('the parser return a newspaper name and a title website')
+@then ('the parser return the newspapers organized by owner')
 def step_impl(context):
-    test = context.parser.search()
-    assert test == ['El Mundo', 'El Pais', 'The Sun', 'The Daily Telegraph', 'The New York Times', 'CNN International', 'Global Times']
+    assert context.parser.search() == context.response
+
+@given ('User input a country')
+def step_impl(context):
+    lista = get_values()
+    args = get_args()
+    context.parser = Parser(lista, args)
+
+@when ('I put country: {arg} in a parser and i expect a {response}')
+def step_impl(context, arg, response):
+    country = list()
+    country = arg.split(",")
+    context.parser.args.country = country
+    test = list()
+    test = response.split(",")
+    context.response = test
+    assert context.parser.args.country
+
+@then ('the parser return the newspapers organized by country')
+def step_impl(context):
+    assert context.parser.search() == context.response
+
     
     
