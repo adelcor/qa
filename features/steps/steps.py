@@ -81,5 +81,47 @@ def step_impl(context, arg, response):
 def step_impl(context):
     assert context.parser.search() == context.response
 
+@given ('User input a Name')
+def step_impl(context):
+    lista = get_values()
+    args = get_args()
+    context.parser = Parser(lista, args)
+
+@when ('I put name: {arg} in a parser and i expect a {response}')
+def step_impl(context, arg, response):
+    name = list()
+    name = arg.split(",")
+    context.parser.args.name = name
+    test = list()
+    test = response
+    context.response = test
+    print(test)
+    assert context.parser.args.name
+
+@then ('the parser return the newspaper info')
+def step_impl(context):
+    assert context.parser.search() == context.response
+
+@given ('User input a website')
+def step_impl(context):
+    lista = get_values()
+    args = get_args()
+    context.parser = Parser(lista, args)
+@when ('I put website: {arg} in a parser and i expect a {response}')
+def step_impl(context, arg, response):
+    web = list()
+    web = arg.split(",")
+    context.parser.args.website = web
+    test = list()
+    test = response.split(">")
+    context.response = test
+    assert context.parser.args.website
+
+@then ('the parser return the website title')
+def step_impl(context):
+    assert context.parser.search() == context.response
+
+
+
     
     

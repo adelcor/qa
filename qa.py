@@ -14,7 +14,8 @@ def get_values():
 def scrap_title(website):
     driver = webdriver.Firefox()
     driver.get(website)
-    title = driver.title
+    temp = driver.title
+    title = temp.replace("|", "")
     driver.quit()
     return title
 
@@ -43,7 +44,21 @@ class Parser:
                         box.append(x['Name'])
                 if self.args.name:        
                     if x['Name'] in self.args.name:
-                        box.append(x)
+                        temp = str()
+                        z = 0
+                        for i in x:
+                            test = str()
+                            test += str(i)
+                            test += ": "
+                            test += str(x[i])
+                            temp += test
+                            if z < 5:
+                                z += 1
+                                temp += ", "
+                        print(temp)
+                        return(temp)
+                        
+                        
                 if self.args.language:
                     for i in x['Language']:
                         if i in self.args.language:
@@ -58,6 +73,7 @@ class Parser:
                     if x['Website'] in self.args.website:
                         box.append(x['Name'])
                         box.append(scrap_title(x['Website']))
+
             print(box)
             return(box)
 """
